@@ -1168,6 +1168,18 @@ resource "aws_cloudwatch_log_group" "ecs_log_group-queue-forwarder_predictions" 
 
 
 
+##################### PEERING Connection #####################
+
+module "vpc_peering" {
+  source              = "./modules/networking/vpc_peering"
+  source_vpc_id       = module.vpc.main_vpc_id
+  source_vpc_cidr     = var.vpc_cidr
+  destination_vpc_id  = var.prod_main_vpc_cidr
+  destination_vpc_cidr = var.prod_main_vpc_cidr
+  cluster_name = var.cluster_name
+}
+
+
 ##################### CLOUD MAP #####################
 
 # resource "null_resource" "retrieve_task_details" {
