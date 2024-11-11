@@ -927,6 +927,7 @@ resource "aws_cloudwatch_log_group" "ecs_log_group-queue_broker_inf" {
 
 
 ###################### queue-broker-time ######################
+
 module "nlb_queue-broker-time-first" {
   source                = "./modules/nlb"
   lb_name               = "${var.cluster_name}-${var.queue_broker_time_app_name}-elb"

@@ -81,6 +81,10 @@ variable "target_group_arn" {
 #   description = "The name of the Load Balancer"
 #   type        = string
 # }
+variable "container_port" {
+  type = list(number)
+  description = "List of container ports corresponding to each target group."
+}
 
 ############## SECURITY GROUP ###############
 variable "lenny_cidr" {type=string}
@@ -190,7 +194,7 @@ variable "queue_http_proxy_health_path" {
 
 variable "queue_http_proxy_container_port" {
   description = "The name of the port"
-  type        = number
+  type        =  list(number)
 }
 
 ################### ADMIN Application###################
@@ -217,7 +221,7 @@ variable "admin_health_path" {
 }
 variable "admin_http_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "admin_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -249,7 +253,7 @@ variable "app_health_path" {
 }
 variable "app_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "app_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -281,7 +285,7 @@ variable "app_react_health_path" {
 }
 variable "app_react_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "app_react_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -313,7 +317,7 @@ variable "archiver_health_path" {
 }
 variable "archiver_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "archiver_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -345,7 +349,7 @@ variable "gtfs_rt_health_path" {
 }
 variable "gtfs_rt_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "gtfs_rt_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -376,7 +380,7 @@ variable "ops_api_health_path" {
 }
 variable "ops_api_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "ops_api_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -391,7 +395,7 @@ variable "ie0_app_name" {
 }
 variable "ie0_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "ie0_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -412,7 +416,7 @@ variable "ie1_app_name" {
 
 variable "ie1_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "ie1_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -431,7 +435,7 @@ variable "ie2_app_name" {
 }
 variable "ie2_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "ie2_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -450,7 +454,7 @@ variable "monitoring_http_app_name" {
 }
 variable "monitoring_http_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "monitoring_http_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -470,7 +474,7 @@ variable "monitoring_queue_app_name" {
 }
 variable "monitoring_queue_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "monitoring_queue_cloudwatch_log_path" {
   description = "The name of the Target Group"
@@ -506,7 +510,7 @@ variable "queue_broker_inf_health_path" {
 }
 variable "queue_broker_inf_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "queue_broker_inf_cloudwatch_log_path" {
   description = "The name of cloudwatch log path"
@@ -551,7 +555,7 @@ variable "queue_broker_time_health_path" {
 }
 variable "queue_broker_time_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "queue_broker_time_cloudwatch_log_path" {
   description = "The name of cloudwatch log path"
@@ -595,7 +599,7 @@ variable "queue_broker_bhs_health_path" {
 }
 variable "queue_broker_bhs_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "queue_broker_bhs_cloudwatch_log_path" {
   description = "The name of cloudwatch log path"
@@ -641,7 +645,7 @@ variable "queue_broker_bhs_high_freq_health_path" {
 }
 variable "queue_broker_bhs_high_freq_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "queue_broker_bhs_high_freq_cloudwatch_log_path" {
   description = "The name of cloudwatch log path"
@@ -685,7 +689,7 @@ variable "queue_forwarder_predictions_health_path" {
 }
 variable "queue_forwarder_predictions_container_port" {
   description = "The name of the Target Group"
-  type        = string
+  type        =  list(number)
 }
 variable "queue_forwarder_predictions_cloudwatch_log_path" {
   description = "The name of cloudwatch log path"

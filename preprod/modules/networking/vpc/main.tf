@@ -16,7 +16,7 @@ data "aws_region" "current" {}
 resource "aws_subnet" "public_subnet" {
   for_each = var.public_subnet_enable ? var.public_subnet_cidrs : {}
 
-  vpc_id                  = local.vpc_id
+  vpc_id                  = aws_vpc.main_vpc.id
   cidr_block              = each.value
   availability_zone       = data.aws_availability_zones.available.names[each.key]
   map_public_ip_on_launch = true
@@ -30,7 +30,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "private_subnet" {
   for_each = var.private_subnet_enable ? var.private_subnet_cidrs : {}
 
-  vpc_id                  = local.vpc_id
+  vpc_id                  = aws_vpc.main_vpc.id
   cidr_block              = each.value
   availability_zone       = data.aws_availability_zones.available.names[each.key]
   map_public_ip_on_launch = false
@@ -42,7 +42,7 @@ resource "aws_subnet" "private_subnet" {
 
 resource "aws_route_table" "public_route" {
   count = var.public_subnet_enable ? 1 : 0
-  vpc_id = local.vpc_id
+  vpc_id = aws_vpc.main_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -58,7 +58,7 @@ resource "aws_route_table" "public_route" {
 
 resource "aws_internet_gateway" "main_igw" {
   count  = var.new_vpc_create ? 1 : 0
-  vpc_id = local.vpc_id
+  vpc_id = aws_vpc.main_vpc.id
 
   tags = {
     Name = "${var.cluster_name}-InternetGateway"
@@ -89,7 +89,7 @@ resource "aws_nat_gateway" "main_natg" {
 
 resource "aws_route_table" "private_main_route" {
   count  = var.private_subnet_enable ? 1 : 0
-  vpc_id = local.vpc_id
+  vpc_id = aws_vpc.main_vpc.id
 
   route {
     cidr_block     = "0.0.0.0/0"

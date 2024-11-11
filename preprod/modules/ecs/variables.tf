@@ -97,6 +97,6 @@ variable "container_name" {
 }
 
 variable "container_port" {
-  description = "Port of the container"
-  type        = number
+  type = list(number)
+  description = "List of container ports corresponding to each target group."
 }
