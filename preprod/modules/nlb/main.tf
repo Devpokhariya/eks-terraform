@@ -7,6 +7,7 @@ resource "aws_lb" "ecs_alb" {
 
   tags = var.tags
 }
+
 resource "aws_lb_listener" "tcp_listener" {
   load_balancer_arn = aws_lb.ecs_alb.arn
   port              = var.target_group_port
@@ -23,14 +24,13 @@ resource "aws_lb_target_group" "ecs_tg" {
   protocol    = "TCP"
   target_type = "ip"
   vpc_id      = var.vpc_id
-  dynamic "health_check" {
-    for_each = var.health_check_path != "" ? [1] : []
-    content {
-      path = var.health_check_path
-      interval            = 30
-      timeout             = 5
-      healthy_threshold   = 3
-      unhealthy_threshold = 2
-    }
-}
+
+  health_check {
+    port                = "traffic-port"
+    protocol            = "TCP"
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 3
+    unhealthy_threshold = 2
+  }
 }
